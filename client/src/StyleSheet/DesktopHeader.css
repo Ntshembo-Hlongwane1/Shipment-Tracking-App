@@ -1,0 +1,19 @@
+.DesktopHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left__logo {
+  width: 15%;
+}
+
+.DesktopHeader__right {
+  display: flex;
+  align-items: center;
+}
+
+.right__navLink {
+  margin-right: 0.8em;
+  font-weight: 500;
+}

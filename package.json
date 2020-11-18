@@ -1,0 +1,8 @@
+{
+  "name": "Shipment-Tracking-App",
+  "version": "1.0.0",
+  "description": "This is the Back-end for a Shipment Tracking App",
+  "main": "server.js",
+  "author": "Junior Hlongwane",
+  "license": "MIT"
+}

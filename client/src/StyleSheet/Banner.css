@@ -1,0 +1,24 @@
+.Banner__image {
+  object-fit: cover;
+  width: 100%;
+  height: 78vh;
+  position: relative;
+}
+
+.Banner__button {
+  position: absolute;
+  top: 88%;
+  padding: 0.8em 2em;
+}
+
+.Banner__btn {
+  border-radius: 999px;
+  padding: 0.8em 2em;
+  font-weight: bolder;
+}
+
+.Banner__btn:hover {
+  background-color: black;
+  color: white;
+  transition: ease-in-out 0.4s;
+}
