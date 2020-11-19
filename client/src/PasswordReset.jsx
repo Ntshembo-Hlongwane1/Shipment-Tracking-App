@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
+import axios from "axios";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -45,8 +45,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PasswordReset() {
+  const user_email = window.location.href.split("/")[4];
+  const user_id = window.location.href.split("/")[5];
+  const [password, setPassword] = useState("");
   const classes = useStyles();
 
+  const ResetPassword = async (e) => {
+    e.preventDefault();
+
+    const data = new FormData();
+    data.append("user_email", user_email);
+    data.append("user_id", user_id);
+    data.append("password", password);
+    const url = "/api/password-reset";
+    try {
+      const response = await axios.post(url, data);
+      alert(response.data.msg);
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -63,11 +81,13 @@ export default function PasswordReset() {
             margin="normal"
             required
             fullWidth
-            id="email"
+            id="password"
+            type="password"
             label="New Password"
             name="password"
             autoComplete="password"
             autoFocus
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <Button
@@ -76,6 +96,7 @@ export default function PasswordReset() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={ResetPassword}
           >
             Reset Password
           </Button>

@@ -122,14 +122,13 @@ class AuthController {
 
     try {
       if (!user) {
-        console.log("Not Authenticated");
         return response.status(400).json({
           authenticated: false,
           isCustomer: false,
           isAdmin: false,
         });
       }
-      console.log("Here");
+
       return response.status(200).json({
         authenticated: true,
         isCustomer: user.isCustomer,

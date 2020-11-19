@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import expressSession from "express-session";
 import MongoStore from "connect-mongodb-session";
 import AUthRoute from "./Routes/Auth";
+import AccountRecoveryRoute from "./Routes/AccountRecovery";
 dotenv.config();
 
 const app = express();
@@ -47,6 +48,7 @@ const Connection_options = {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 };
 
 mongoose.connect(mongoURI, Connection_options, (error) => {
@@ -59,6 +61,7 @@ mongoose.connect(mongoURI, Connection_options, (error) => {
 
 //========================================================Server Endpoint===============================================
 app.use(AUthRoute);
+app.use(AccountRecoveryRoute);
 
 //=================================================Server Configs & Connection==========================================
 const PORT = process.env.PORT || 5000;
