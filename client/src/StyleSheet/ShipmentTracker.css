@@ -1,0 +1,39 @@
+.ShipmentTracker {
+  text-align: center;
+  margin-top: 12em;
+  font-weight: bolder;
+}
+
+.ShipmentTracker__inputField {
+  width: 50%;
+  font-weight: bold;
+}
+
+.ShipmentTracker__details {
+  margin-top: 2em;
+  padding: 1.5em;
+}
+
+.details__destination {
+  display: flex;
+  border-bottom: 2px solid lightgray;
+  margin-bottom: 1.5em;
+}
+
+.location-current {
+  margin-right: 0.8em;
+}
+
+.location-destination {
+  margin-left: 0.8em;
+}
+
+.details__shipmentDetails {
+  border-bottom: 2px solid lightgray;
+  margin-bottom: 2.5em;
+}
+
+.shipmentDetails__status > h4 {
+  font-weight: bolder;
+  font-size: 1.2rem;
+}

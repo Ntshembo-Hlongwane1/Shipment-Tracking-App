@@ -53,8 +53,9 @@ export default function SignIn() {
     const data = new FormData();
     data.append("email", email);
     data.append("password", password);
+    const url = "/api/user-login";
     try {
-      const response = await axios.post("/api/user-login", data);
+      const response = await axios.post(url, data);
       if (response.status === 200) {
         history.push("/");
         window.location.reload(false);

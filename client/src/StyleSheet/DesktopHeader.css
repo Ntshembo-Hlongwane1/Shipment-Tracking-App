@@ -11,9 +11,14 @@
 .DesktopHeader__right {
   display: flex;
   align-items: center;
+  margin-right: 1em;
 }
 
 .right__navLink {
   margin-right: 0.8em;
   font-weight: 500;
+}
+
+.logout-btn {
+  cursor: pointer;
 }

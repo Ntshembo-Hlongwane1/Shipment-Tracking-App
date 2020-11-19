@@ -6,6 +6,7 @@ import expressSession from "express-session";
 import MongoStore from "connect-mongodb-session";
 import AUthRoute from "./Routes/Auth";
 import AccountRecoveryRoute from "./Routes/AccountRecovery";
+import ShipmentRoutes from "./Routes/ShipmentRoutes";
 dotenv.config();
 
 const app = express();
@@ -13,7 +14,7 @@ const app = express();
 //=====================================================Middlewares======================================================
 app.use(
   cors({
-    origin: "http://127.0.0.1:3000",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -62,7 +63,7 @@ mongoose.connect(mongoURI, Connection_options, (error) => {
 //========================================================Server Endpoint===============================================
 app.use(AUthRoute);
 app.use(AccountRecoveryRoute);
-
+app.use(ShipmentRoutes);
 //=================================================Server Configs & Connection==========================================
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Map from "./Map";
 import "./StyleSheet/ShipmentRequest.css";
+import axios from "axios";
 const ShipmentRequest = ({ authenticated, isCustomer }) => {
   const history = useHistory();
   const [weight, setWeight] = useState("");
@@ -29,11 +30,31 @@ const ShipmentRequest = ({ authenticated, isCustomer }) => {
       `Cofirm is this the address you want to ship to (Y/N)? Address: ${fullAddress}`
     );
 
-    if (confirmation === null) {
-      return window.location.reload(false);
+    if (confirmation === null || confirmation === "") {
+      return console.log("Address not confirmed");
     }
 
-    const url = "/api/request-shipment";
+    if (confirmation.toLowerCase() === "n") {
+      return console.log("Address not confirmed");
+    }
+    if (confirmation.toLowerCase() === "y") {
+      const data = new FormData();
+      data.append("fullAddress", fullAddress);
+      data.append("city", city);
+      data.append("province", province);
+      data.append("area", area);
+      data.append("weight", weight);
+      const url = "/api/request-shipment";
+
+      axios
+        .post(url, data)
+        .then((response) => {
+          alert(response.data.msg);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
   return (
     <div className="ShipmentRequest">

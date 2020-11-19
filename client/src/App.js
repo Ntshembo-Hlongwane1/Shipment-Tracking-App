@@ -10,6 +10,7 @@ import axios from "axios";
 import PasswordReset from "./PasswordReset";
 import Map from "./Map";
 import ShipmentRequest from "./ShipmentRequest";
+import ShipmentTracker from "./ShipmentTracker";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -45,8 +46,20 @@ const App = () => {
     <Router className="App">
       <Switch>
         <Route path="/user-login" exact={true}>
-          <Header />
+          <Header
+            authenticated={isAuthenticated}
+            isAdmin={isAdmin}
+            isCustomer={isCustomer}
+          />
           <SignIn />
+        </Route>
+        <Route path="/track-shipment" exact={true}>
+          <Header
+            authenticated={isAuthenticated}
+            isAdmin={isAdmin}
+            isCustomer={isCustomer}
+          />
+          <ShipmentTracker />
         </Route>
         <Route path="/request-shipment" exact={true}>
           <Header

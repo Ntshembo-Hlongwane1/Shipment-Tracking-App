@@ -10,10 +10,11 @@ import Geocode from "react-geocode";
 import Autocomplete from "react-google-autocomplete";
 import { Descriptions } from "antd";
 import "antd/dist/antd.css";
+import axios from "axios";
 Geocode.setApiKey("AIzaSyCXoDd6wbl4gGbcgk286sUo2Knx2g1FpLk");
 Geocode.enableDebug();
 
-class Map extends React.Component {
+class TrackerMap extends React.Component {
   state = {
     address: "",
     city: "",
@@ -32,49 +33,24 @@ class Map extends React.Component {
   };
 
   componentDidMount() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log("Positionsss", navigator.geolocation);
-        this.setState(
-          {
-            mapPosition: {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            },
-            markerPosition: {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            },
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.location}&key=AIzaSyCXoDd6wbl4gGbcgk286sUo2Knx2g1FpLk`;
+    axios
+      .get(url)
+      .then((res) => {
+        this.setState({
+          mapPosition: {
+            lat: res.data.results[0].geometry.location.lat,
+            lng: res.data.results[0].geometry.location.lng,
           },
-          () => {
-            Geocode.fromLatLng(
-              position.coords.latitude,
-              position.coords.longitude
-            ).then(
-              (response) => {
-                const address = response.results[0].formatted_address,
-                  addressArray = response.results[0].address_components,
-                  city = this.getCity(addressArray),
-                  area = this.getArea(addressArray),
-                  state = this.getState(addressArray);
-
-                this.setState({
-                  address: address ? address : "",
-                  area: area ? area : "",
-                  city: city ? city : "",
-                  state: state ? state : "",
-                });
-              },
-              (error) => {
-                console.error(error);
-              }
-            );
-          }
-        );
+          markerPosition: {
+            lat: res.data.results[0].geometry.location.lat,
+            lng: res.data.results[0].geometry.location.lng,
+          },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    } else {
-      console.error("Geolocation is not supported by this browser!");
-    }
   }
 
   getCity = (addressArray) => {
@@ -273,4 +249,4 @@ class Map extends React.Component {
   }
 }
 
-export default Map;
+export default TrackerMap;

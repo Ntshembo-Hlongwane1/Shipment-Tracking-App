@@ -26,9 +26,9 @@ const DesktopHeader = ({ isAuthenticated, isAdmin, isCustomer }) => {
       </div>
       <div className="DesktopHeader__right">
         {isAuthenticated === true ? (
-          <Link className="Router__link" onClick={LogOut}>
-            <h4 className="right__navLink">Logout</h4>
-          </Link>
+          <h4 className="right__navLink logout-btn" onClick={LogOut}>
+            Logout
+          </h4>
         ) : (
           <Link className="Router__link" to="/user-signup">
             <h4 className="right__navLink">SIgnup</h4>
@@ -38,12 +38,12 @@ const DesktopHeader = ({ isAuthenticated, isAdmin, isCustomer }) => {
           <h4 className="right__navLink">Customer Support</h4>
         </Link>
         {isAdmin === true ? (
-          <Link className="Router__link">
+          <Link className="Router__link" to="/admin-dashboard">
             <h4>Admin DashBoard</h4>
           </Link>
         ) : isCustomer === true ? (
-          <Link className="Router__link">
-            <h4 className="right__navLink">Customer Dashboard</h4>
+          <Link className="Router__link" to="/track-shipment">
+            <h4 className="right__navLink">Track Shipment</h4>
           </Link>
         ) : null}
       </div>
