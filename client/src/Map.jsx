@@ -79,64 +79,52 @@ class Map extends React.Component {
   getCity = (addressArray) => {
     console.log("Address: ", addressArray);
     let city = "";
-    try {
-      for (let i = 0; i < addressArray.length; i++) {
-        if (
-          addressArray[i].types[0] &&
-          "administrative_area_level_2" === addressArray[i].types[0]
-        ) {
-          city = addressArray[i].long_name;
-          return city;
-        }
+
+    for (let i = 0; i < addressArray.length; i++) {
+      if (
+        addressArray[i].types[0] &&
+        "administrative_area_level_2" === addressArray[i].types[0]
+      ) {
+        city = addressArray[i].long_name;
+        localStorage.setItem("city", city);
+        return city;
       }
-    } catch (error) {
-      alert(
-        "Do not press Enter button to choose location click on suggested or Add name in field below"
-      );
     }
   };
 
   getArea = (addressArray) => {
     let area = "";
-    try {
-      for (let i = 0; i < addressArray.length; i++) {
-        if (addressArray[i].types[0]) {
-          for (let j = 0; j < addressArray[i].types.length; j++) {
-            if (
-              "sublocality_level_1" === addressArray[i].types[j] ||
-              "locality" === addressArray[i].types[j]
-            ) {
-              area = addressArray[i].long_name;
-              return area;
-            }
+
+    for (let i = 0; i < addressArray.length; i++) {
+      if (addressArray[i].types[0]) {
+        for (let j = 0; j < addressArray[i].types.length; j++) {
+          if (
+            "sublocality_level_1" === addressArray[i].types[j] ||
+            "locality" === addressArray[i].types[j]
+          ) {
+            area = addressArray[i].long_name;
+            localStorage.setItem("area", area);
+            return area;
           }
         }
       }
-    } catch (error) {
-      alert(
-        "Do not press Enter button to choose location click on suggested or Add name in field below"
-      );
     }
   };
 
   getState = (addressArray) => {
     let state = "";
-    try {
+
+    for (let i = 0; i < addressArray.length; i++) {
       for (let i = 0; i < addressArray.length; i++) {
-        for (let i = 0; i < addressArray.length; i++) {
-          if (
-            addressArray[i].types[0] &&
-            "administrative_area_level_1" === addressArray[i].types[0]
-          ) {
-            state = addressArray[i].long_name;
-            return state;
-          }
+        if (
+          addressArray[i].types[0] &&
+          "administrative_area_level_1" === addressArray[i].types[0]
+        ) {
+          state = addressArray[i].long_name;
+          localStorage.setItem("province", state);
+          return state;
         }
       }
-    } catch (error) {
-      alert(
-        "Do not press Enter button to choose location click on suggested or Add name in field below"
-      );
     }
   };
 
@@ -153,11 +141,12 @@ class Map extends React.Component {
     Geocode.fromLatLng(newLat, newLng).then(
       (response) => {
         console.log("RES: ", response);
-        const address = response.results[0].formatted_address,
-          addressArray = response.results[0].address_components,
-          city = this.getCity(addressArray),
-          area = this.getArea(addressArray),
-          state = this.getState(addressArray);
+        const address = response.results[0].formatted_address;
+        const addressArray = response.results[0].address_components;
+        const city = this.getCity(addressArray);
+        const area = this.getArea(addressArray);
+        const state = this.getState(addressArray);
+        localStorage.setItem("fullAddress", address);
         this.setState({
           address: address ? address : "",
           area: area ? area : "",
@@ -180,17 +169,15 @@ class Map extends React.Component {
   };
 
   onPlaceSelected = (place) => {
-    console.log("plc", place);
-    const address = place.formatted_address,
-      addressArray = place.address_components,
-      city = this.getCity(addressArray),
-      area = this.getArea(addressArray),
-      state = this.getState(addressArray),
-      latValue = place.geometry.location.lat(),
-      lngValue = place.geometry.location.lng();
+    const address = place.formatted_address;
+    const addressArray = place.address_components;
+    const city = this.getCity(addressArray);
+    const area = this.getArea(addressArray);
+    const state = this.getState(addressArray);
+    const latValue = place.geometry.location.lat();
+    const lngValue = place.geometry.location.lng();
 
-    console.log("latvalue", latValue);
-    console.log("lngValue", lngValue);
+    localStorage.setItem("fullAddress", address);
 
     // Set these values in the state.
     this.setState({

@@ -1,0 +1,32 @@
+.ShipmentRequest__form {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  margin: 0 auto;
+}
+.form__header {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.form__inputField {
+  margin-bottom: 1.5em;
+}
+
+.form__requiredField {
+  color: red;
+}
+
+.form-btn {
+  border-radius: 999px;
+  font-weight: bolder;
+  margin-top: 4em;
+  margin-bottom: 2em;
+  padding: 0.4em 0;
+}
+
+.form-btn:hover {
+  background-color: black;
+  transition: ease-in-out 0.4s;
+  color: white;
+}

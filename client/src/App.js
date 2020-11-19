@@ -9,6 +9,7 @@ import ForgotPassword from "./ForgotPassword";
 import axios from "axios";
 import PasswordReset from "./PasswordReset";
 import Map from "./Map";
+import ShipmentRequest from "./ShipmentRequest";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,6 +47,17 @@ const App = () => {
         <Route path="/user-login" exact={true}>
           <Header />
           <SignIn />
+        </Route>
+        <Route path="/request-shipment" exact={true}>
+          <Header
+            authenticated={isAuthenticated}
+            isAdmin={isAdmin}
+            isCustomer={isCustomer}
+          />
+          <ShipmentRequest
+            authenticated={isAuthenticated}
+            isCustomer={isCustomer}
+          />
         </Route>
         <Route path="/map" exact={true}>
           <Map />
