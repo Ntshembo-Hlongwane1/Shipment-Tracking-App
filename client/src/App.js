@@ -8,6 +8,7 @@ import SignIn from "./SignIn";
 import ForgotPassword from "./ForgotPassword";
 import axios from "axios";
 import PasswordReset from "./PasswordReset";
+import Map from "./Map";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -45,6 +46,9 @@ const App = () => {
         <Route path="/user-login" exact={true}>
           <Header />
           <SignIn />
+        </Route>
+        <Route path="/map" exact={true}>
+          <Map />
         </Route>
         <Route path="/password-reset/:email/:id" exact={true}>
           <Header />
