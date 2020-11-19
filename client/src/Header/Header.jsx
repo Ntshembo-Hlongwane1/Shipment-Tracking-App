@@ -1,12 +1,16 @@
 import React from "react";
-import { BrowserView, MobileView } from "react-device-detect";
+import { BrowserView } from "react-device-detect";
 import DesktopHeader from "./DesktopHeader";
 import "../StyleSheet/Header.css";
-const Header = () => {
+const Header = ({ authenticated, isAdmin, isCustomer }) => {
   return (
     <div className="Header">
       <BrowserView>
-        <DesktopHeader />
+        <DesktopHeader
+          isAuthenticated={authenticated}
+          isAdmin={isAdmin}
+          isCustomer={isCustomer}
+        />
       </BrowserView>
     </div>
   );

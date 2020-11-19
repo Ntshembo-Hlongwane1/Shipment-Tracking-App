@@ -122,8 +122,14 @@ class AuthController {
 
     try {
       if (!user) {
-        return response.status(400).json({ authenticated: false });
+        console.log("Not Authenticated");
+        return response.status(400).json({
+          authenticated: false,
+          isCustomer: false,
+          isAdmin: false,
+        });
       }
+      console.log("Here");
       return response.status(200).json({
         authenticated: true,
         isCustomer: user.isCustomer,
@@ -133,6 +139,26 @@ class AuthController {
       return response
         .status(500)
         .json({ msg: "Server currently down please try again" });
+    }
+  }
+
+  Logout(request, response) {
+    const user = request.session.user || false;
+    try {
+      if (!user) {
+        return response.status(400).json({ msg: "Not logged in" });
+      }
+
+      request.session.destroy((error) => {
+        if (error) {
+          return console.log(error);
+        }
+      });
+      response.status(200).json({ msg: "Logged out" });
+    } catch (error) {
+      return response
+        .status(500)
+        .json({ msg: "Server is currently down please try again later" });
     }
   }
 }

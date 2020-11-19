@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import axios from "axios";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -44,26 +44,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const history = useHistory();
-  const LoginUser = async (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    data.append("email", email);
-    data.append("password", password);
-    try {
-      const response = await axios.post("/api/user-login", data);
-      if (response.status === 200) {
-        history.push("/");
-        window.location.reload(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export default function PasswordReset() {
   const classes = useStyles();
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -72,7 +55,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Reset Password
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -81,23 +64,10 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
+            label="New Password"
             name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="password"
+            autoFocus
           />
 
           <Button
@@ -106,19 +76,13 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={LoginUser}
           >
-            Sign In
+            Reset Password
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link to="/account-recovery/forgot-password" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
-              <Link to="/user-signup" variant="body2">
-                {"Don't have an account? Sign Up"}
+              <Link to="/user-login" variant="body2">
+                {"Already have an account? Sign in"}
               </Link>
             </Grid>
           </Grid>

@@ -6,7 +6,7 @@ const Home = ({ authenticated, isAdmin, isCustomer }) => {
   return (
     <div className="Home">
       <Header
-        isAuthenticated={authenticated}
+        authenticated={authenticated}
         isAdmin={isAdmin}
         isCustomer={isCustomer}
       />

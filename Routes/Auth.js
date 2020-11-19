@@ -16,4 +16,8 @@ router.get("/api/isLoggedIn", (request, response) => {
   AuthController.isLoggedIn(request, response);
 });
 
+router.get("/api/logout", (request, response) => {
+  AuthController.Logout(request, response);
+});
+
 export default router;

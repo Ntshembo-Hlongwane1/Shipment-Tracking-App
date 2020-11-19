@@ -7,6 +7,7 @@ import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import ForgotPassword from "./ForgotPassword";
 import axios from "axios";
+import PasswordReset from "./PasswordReset";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,16 +17,27 @@ const App = () => {
   useEffect(() => {
     const url = "/api/isLoggedIn";
 
-    axios.get(url).then((response) => {
-      const isAdmin_status = response.data.isAdmin;
-      const isLoggedin_status = response.data.authenticated;
-      const isCustomer_status = response.data.isCustomer;
+    async function loadData() {
+      try {
+        const response = await axios.get(url);
+        const auth_status = response.data.authenticated;
+        const customer_status = response.data.isCustomer;
+        const admin_status = response.data.isAdmin;
 
-      setIsAdmin(isAdmin_status);
-      setIsAuthenticated(isLoggedin_status);
-      setIsCustomer(isCustomer_status);
-    });
-  }, []);
+        if (mounted) {
+          setIsAdmin(admin_status);
+          setIsAuthenticated(auth_status);
+          setIsCustomer(customer_status);
+        }
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    }
+    loadData();
+    return () => {
+      setMounted(false);
+    };
+  }, [mounted]);
 
   return (
     <Router className="App">
@@ -33,6 +45,10 @@ const App = () => {
         <Route path="/user-login" exact={true}>
           <Header />
           <SignIn />
+        </Route>
+        <Route path="/password-reset/:email/:id" exact={true}>
+          <Header />
+          <PasswordReset />
         </Route>
         <Route path="/account-recovery/forgot-password" exact={true}>
           <Header />
