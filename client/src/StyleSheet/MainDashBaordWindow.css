@@ -1,0 +1,39 @@
+.DashBoardContent {
+  flex: 0.8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.DashBoardContent__header {
+  font-weight: bolder;
+  margin-bottom: 2em;
+}
+
+.DashBoarContent__mainWindow {
+  display: flex;
+}
+
+.mainWindow__cards {
+  background-color: #2f363f;
+  padding: 4em 2em;
+  height: 30vh;
+  transition: transform 0.4s;
+  box-shadow: 1rem 2rem 2rem lightslategray;
+}
+
+.mainWindow__cards > h2 {
+  color: white;
+}
+
+.mainWindow__cards:hover {
+  transform: scale(1.1);
+}
+
+.left-card {
+  margin-right: 5em;
+}
+
+.right-card {
+  margin-left: 5em;
+}

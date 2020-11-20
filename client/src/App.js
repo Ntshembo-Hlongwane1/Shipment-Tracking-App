@@ -11,6 +11,9 @@ import PasswordReset from "./PasswordReset";
 import Map from "./Map";
 import ShipmentRequest from "./ShipmentRequest";
 import ShipmentTracker from "./ShipmentTracker";
+import DashBoard from "./AdminDashBoard/DashBoard";
+import PendingShipments from "./AdminDashBoard/PendingShipments";
+import AllDelivered from "./AdminDashBoard/AllDelivered";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -52,6 +55,30 @@ const App = () => {
             isCustomer={isCustomer}
           />
           <SignIn />
+        </Route>
+        <Route path="/admin-dashboard/pending-shipments" exact={true}>
+          <Header
+            authenticated={isAuthenticated}
+            isAdmin={isAdmin}
+            isCustomer={isCustomer}
+          />
+          <PendingShipments />
+        </Route>
+        <Route path="/admin-dashboard/finihed-shipments" exact={true}>
+          <Header
+            authenticated={isAuthenticated}
+            isAdmin={isAdmin}
+            isCustomer={isCustomer}
+          />
+          <AllDelivered />
+        </Route>
+        <Route path="/admin-dashboard" exact={true}>
+          <Header
+            authenticated={isAuthenticated}
+            isAdmin={isAdmin}
+            isCustomer={isCustomer}
+          />
+          <DashBoard />
         </Route>
         <Route path="/track-shipment" exact={true}>
           <Header

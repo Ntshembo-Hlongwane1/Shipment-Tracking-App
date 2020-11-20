@@ -1,0 +1,13 @@
+.SideBarLayOut {
+  display: flex;
+  padding: 1em;
+}
+
+.SideBarLayOut:hover {
+  background-color: lightgray;
+  border-radius: 999px;
+}
+
+.SideBarLayOut > h4 {
+  margin-left: 0.5em;
+}

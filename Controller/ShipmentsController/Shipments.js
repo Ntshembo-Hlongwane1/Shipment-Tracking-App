@@ -90,6 +90,38 @@ class ShipmentsController {
         .json({ msg: "Server is currently down please try again later" });
     }
   }
+
+  async GetAllPending(request, response) {
+    try {
+      const data = await shipmentModel.find();
+
+      const filteredData = data.filter(
+        (info) => info.shipment_orders.status !== "Delivered"
+      );
+
+      return response.status(200).json(filteredData);
+    } catch (error) {
+      return response
+        .status(500)
+        .json({ msg: "Server curretly down please try again later" });
+    }
+  }
+
+  async GetAllDelivered(request, response) {
+    try {
+      const data = await shipmentModel.find();
+
+      const filteredData = data.filter(
+        (info) => info.shipment_orders.status === "Delivered"
+      );
+
+      console.log(filteredData);
+    } catch (error) {
+      return response
+        .status(400)
+        .json({ msg: "Server is currently down please try again" });
+    }
+  }
 }
 
 export default ShipmentsController;

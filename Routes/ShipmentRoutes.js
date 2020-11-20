@@ -12,4 +12,12 @@ router.post("/api/track-shipment", (request, response) => {
   ShipmentController.ShipmentLookUp(request, response);
 });
 
+router.get("/api/all-pending-shipments", (request, response) => {
+  ShipmentController.GetAllPending(request, response);
+});
+
+router.get("/api/all-delivered-shipments", (request, response) => {
+  ShipmentController.GetAllDelivered(request, response);
+});
+
 export default router;
