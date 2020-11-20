@@ -122,6 +122,41 @@ class ShipmentsController {
         .json({ msg: "Server is currently down please try again" });
     }
   }
+
+  async UpdateStatus(request, response) {
+    const form = new Formidable.IncomingForm();
+    try {
+      const shipment_id = request.params.id;
+      const shipment = await shipmentModel.findOne({ _id: shipment_id });
+
+      form.parse(request, async (error, fields, files) => {
+        if (error) {
+          return response.status(500).json({
+            msg:
+              "Network Error: Failed to change status please try again later",
+          });
+        }
+
+        const { status } = fields;
+
+        shipment.shipment_orders.status = status;
+
+        const updated_document = await shipmentModel.findOneAndUpdate(
+          { _id: shipment_id },
+          shipment,
+          { new: true }
+        );
+
+        return response
+          .status(200)
+          .json({ msg: "Status Successfully Changed" });
+      });
+    } catch (error) {
+      return response
+        .status(500)
+        .json({ msg: "Server is currently down please try again later" });
+    }
+  }
 }
 
 export default ShipmentsController;

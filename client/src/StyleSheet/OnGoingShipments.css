@@ -1,3 +1,51 @@
 .OnGoingShipments {
   flex: 0.8;
+  padding: 2em;
+}
+
+.OnGoingShipments__details {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.detail {
+  margin-bottom: 2em;
+  background-color: white;
+  box-shadow: 2rem 1.5rem 2rem #f5f5f5f5;
+  width: 100%;
+  padding: 1.5em;
+  transition: transform 0.4s;
+}
+.detail:hover {
+  transform: scale(1.05);
+}
+
+.detail__locations {
+  display: flex;
+}
+
+.locations-current {
+  margin-right: 0.5em;
+}
+
+.locations-destination {
+  margin-left: 0.5em;
+}
+
+.btn-leftwarehouse {
+  background-color: orange;
+}
+
+.btn-delivered {
+  background-color: green;
+  margin-left: 0.5em;
+}
+
+.btn-cancel {
+  background-color: red;
+  margin-left: 0.5em;
+}
+
+.btn {
+  margin-top: 1em;
 }

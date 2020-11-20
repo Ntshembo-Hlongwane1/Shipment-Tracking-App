@@ -20,4 +20,8 @@ router.get("/api/all-delivered-shipments", (request, response) => {
   ShipmentController.GetAllDelivered(request, response);
 });
 
+router.post("/api/update-status/:id", (request, response) => {
+  ShipmentController.UpdateStatus(request, response);
+});
+
 export default router;
