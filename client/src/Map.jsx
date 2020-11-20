@@ -263,7 +263,7 @@ class Map extends React.Component {
         </Descriptions>
 
         <AsyncMap
-          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GoogleApiKey}&libraries=place`}
+          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GoogleApiKey}&libraries=places`}
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: this.state.height }} />}
           mapElement={<div style={{ height: `100%` }} />}
