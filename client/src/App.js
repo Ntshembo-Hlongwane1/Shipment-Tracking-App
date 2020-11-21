@@ -20,6 +20,7 @@ const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isCustomer, setIsCustomer] = useState(false);
   const [mounted, setMounted] = useState(true);
+
   useEffect(() => {
     const url = "/api/isLoggedIn";
 
