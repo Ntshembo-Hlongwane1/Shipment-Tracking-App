@@ -2,10 +2,13 @@ import React from "react";
 import OnGoingShipments from "./OnGoingShipments";
 import SideBar from "./SideBar";
 import "../StyleSheet/PendingShipments.css";
+import { BrowserView } from "react-device-detect";
 const PendingShipments = () => {
   return (
     <div className="Pending">
-      <SideBar />
+      <BrowserView>
+        <SideBar />
+      </BrowserView>
       <OnGoingShipments />
     </div>
   );

@@ -1,7 +1,7 @@
 import Formidable from "formidable";
 import { shipmentModel } from "../../Models/Shipments/Shipments";
 import { userModel } from "../../Models/Users/Users";
-
+import twilio from "twilio";
 class ShipmentsController {
   RequestShipment(request, response) {
     const form = new Formidable.IncomingForm();
@@ -138,18 +138,33 @@ class ShipmentsController {
         }
 
         const { status } = fields;
-
+        const previous_shipemnt_status = shipment.shipment_orders.status;
         shipment.shipment_orders.status = status;
-
+        const current_shipment_status = shipment.shipment_orders.status;
         const updated_document = await shipmentModel.findOneAndUpdate(
           { _id: shipment_id },
           shipment,
           { new: true }
         );
 
-        return response
-          .status(200)
-          .json({ msg: "Status Successfully Changed" });
+        const twilio__AccountSiD = process.env.twilio__accountSiD;
+        const twilio__authToken = process.env.twilio__authToken;
+        const client = twilio(twilio__AccountSiD, twilio__authToken);
+
+        const messageOptions = {
+          body: `Your shipment order with order id: ${shipment_id} changed status from ${previous_shipemnt_status} to ${current_shipment_status}`,
+          from: process.env.twilio__number,
+          to: process.env.test__number,
+        };
+        client.messages.create(messageOptions, (error, results) => {
+          if (error) {
+            console.log(error);
+          } else {
+            return response
+              .status(200)
+              .json({ msg: "Status Successfully Changed" });
+          }
+        });
       });
     } catch (error) {
       return response
