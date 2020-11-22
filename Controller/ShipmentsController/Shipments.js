@@ -138,14 +138,39 @@ class ShipmentsController {
         }
 
         const { status } = fields;
-        const previous_shipemnt_status = shipment.shipment_orders.status;
-        shipment.shipment_orders.status = status;
-        const current_shipment_status = shipment.shipment_orders.status;
-        const updated_document = await shipmentModel.findOneAndUpdate(
-          { _id: shipment_id },
-          shipment,
-          { new: true }
-        );
+        let previous_shipemnt_status = "";
+        let current_shipment_status = "";
+        if (status === "Canceled") {
+          previous_shipemnt_status = shipment.shipment_orders.status;
+          shipment.shipment_orders.status = status;
+          current_shipment_status = shipment.shipment_orders.status;
+          const updated_document = await shipmentModel.findOneAndUpdate(
+            { _id: shipment_id },
+            shipment,
+            { new: true }
+          );
+        } else if (status === "Delivered") {
+          previous_shipemnt_status = shipment.shipment_orders.status;
+          shipment.shipment_orders.status = status;
+          current_shipment_status = shipment.shipment_orders.status;
+          shipment.arrival_time = request.params.time;
+          const updated_document = await shipmentModel.findOneAndUpdate(
+            { _id: shipment_id },
+            shipment,
+            { new: true }
+          );
+        } else {
+          previous_shipemnt_status = shipment.shipment_orders.status;
+          shipment.shipment_orders.status = status;
+          current_shipment_status = shipment.shipment_orders.status;
+          shipment.pickup_time = request.params.time;
+          shipment.deliverer = request.params.driver;
+          const updated_document = await shipmentModel.findOneAndUpdate(
+            { _id: shipment_id },
+            shipment,
+            { new: true }
+          );
+        }
 
         const twilio__AccountSiD = process.env.twilio__accountSiD;
         const twilio__authToken = process.env.twilio__authToken;

@@ -19,18 +19,70 @@ const OnGoingShipments = () => {
   });
 
   const ChangeStatus = (ID, status) => {
-    const url = `/api/update-status/${ID}`;
-    const data = new FormData();
-    data.append("status", status);
+    let driver_picking_up_order = "";
+    let pickup_time = "";
+    let arrival_time = "";
+    const date = new Date();
+    if (status === "Left Warehouse") {
+      driver_picking_up_order = prompt(
+        "What is the name of the driver picking up shipment order?"
+      );
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      const ampm = hours >= 12 ? "pm" : "am";
+      hours %= 12;
+      hours = hours || 12;
+      minutes = minutes < 10 ? `0${minutes}` : minutes;
+      pickup_time = `${hours}:${minutes} ${ampm}`;
 
-    axios
-      .post(url, data)
-      .then((response) => {
-        alert(response.data.msg);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      const url = `/api/update-status/${ID}/${pickup_time}/${driver_picking_up_order}`;
+      const data = new FormData();
+      data.append("status", status);
+      data.append("pickup_time", pickup_time);
+      axios
+        .post(url, data)
+        .then((response) => {
+          alert(response.data.msg);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (status === "Delivered") {
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      const ampm = hours >= 12 ? "pm" : "am";
+
+      hours %= 12;
+      hours = hours || 12;
+      minutes = minutes < 10 ? `0${minutes}` : minutes;
+      arrival_time = `${hours}:${minutes} ${ampm}`;
+
+      const url = `/api/update-status/${ID}/${arrival_time}/${null}`;
+      const data = new FormData();
+      data.append("status", status);
+      data.append("arrival_time", arrival_time);
+      axios
+        .post(url, data)
+        .then((response) => {
+          alert(response.data.msg);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      const url = `/api/update-status/${ID}/${null}/${null}`;
+      const data = new FormData();
+      data.append("status", status);
+
+      axios
+        .post(url, data)
+        .then((response) => {
+          alert(response.data.msg);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
   return (
     <div className="OnGoingShipments">
@@ -46,6 +98,20 @@ const OnGoingShipments = () => {
                 </div>
                 <div className="detail__status">
                   <h4>{`Status: ${info.shipment_orders.status}`}</h4>
+                </div>
+                <div className="detail__pickupTime">
+                  {info.pickup_time === "" ? (
+                    <h4>Parcel waiting awaiting pickup</h4>
+                  ) : (
+                    <h4>{`Picked up at: ${info.pickup_time}`}</h4>
+                  )}
+                </div>
+                <div className="detail__driver">
+                  {info.deliverer === "" ? (
+                    <h4>No Driver Assigned Yet</h4>
+                  ) : (
+                    <h4>{`Driver: ${info.deliverer}`}</h4>
+                  )}
                 </div>
                 <div className="detail__owner">
                   <h5>{`Owner: Mr/Mrs ${info.owner_lastname} ${info.owner_firstname}`}</h5>
