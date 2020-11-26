@@ -7,6 +7,7 @@ import MongoStore from "connect-mongodb-session";
 import AUthRoute from "./Routes/Auth";
 import AccountRecoveryRoute from "./Routes/AccountRecovery";
 import ShipmentRoutes from "./Routes/ShipmentRoutes";
+import path from "path";
 dotenv.config();
 
 const app = express();
@@ -14,7 +15,7 @@ const app = express();
 //=====================================================Middlewares======================================================
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: `https://shipment-tracker-web-app.herokuapp.com/`,
     credentials: true,
   })
 );
@@ -59,6 +60,17 @@ mongoose.connect(mongoURI, Connection_options, (error) => {
 
   console.log("Connection to MongoDB was successful");
 });
+
+//================================================Production Setup======================================================
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (request, response) => {
+    response.sendFile(
+      path.resolve(__dirname, "./client", "build", "index.html")
+    );
+  });
+}
 
 //========================================================Server Endpoint===============================================
 app.use(AUthRoute);
