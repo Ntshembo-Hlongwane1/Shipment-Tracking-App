@@ -61,9 +61,16 @@ export default function SignUp() {
     data.append("password", password);
 
     const url = "/api/user-signup";
-    const response = await axios.post(url, data);
-
-    console.log(response);
+    try {
+      const response = await axios.post(url, data);
+      if (response.status === 200) {
+        history.push("/");
+        window.location.reload(false);
+      }
+    } catch (error) {
+      alert(error.response.data.msg);
+      console.log(error);
+    }
   };
 
   const classes = useStyles();

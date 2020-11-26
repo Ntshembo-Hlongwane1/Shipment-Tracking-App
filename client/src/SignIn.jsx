@@ -61,6 +61,7 @@ export default function SignIn() {
         window.location.reload(false);
       }
     } catch (error) {
+      alert(error.response.data.msg);
       console.log(error);
     }
   };

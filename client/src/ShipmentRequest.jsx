@@ -52,6 +52,7 @@ const ShipmentRequest = ({ authenticated, isCustomer }) => {
           alert(response.data.msg);
         })
         .catch((error) => {
+          alert(error.response.data.msg);
           console.log(error);
         });
     }
