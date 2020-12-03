@@ -59,7 +59,7 @@ export default function PasswordReset() {
     data.append("password", password);
     const url = "/api/password-reset";
     try {
-      const response = await axios.post(url, data);
+      const response = await axios.post(url, data, { withCredentials: true });
       alert(response.data.msg);
     } catch (error) {
       alert(error.response.data.msg);

@@ -55,7 +55,7 @@ export default function SignIn() {
     data.append("password", password);
     const url = "/api/user-login";
     try {
-      const response = await axios.post(url, data);
+      const response = await axios.post(url, data, { withCredentials: true });
       if (response.status === 200) {
         history.push("/");
         window.location.reload(false);

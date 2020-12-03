@@ -13,7 +13,7 @@ const ShipmentTracker = () => {
 
     const url = "/api/track-shipment";
     axios
-      .post(url, data)
+      .post(url, data, { withCredentials: true })
       .then((response) => {
         setShipmentDetails(response.data);
       })

@@ -26,7 +26,7 @@ const App = () => {
 
     async function loadData() {
       try {
-        const response = await axios.get(url);
+        const response = await axios.get(url, { withCredentials: true });
         const auth_status = response.data.authenticated;
         const customer_status = response.data.isCustomer;
         const admin_status = response.data.isAdmin;

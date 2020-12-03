@@ -35,7 +35,7 @@ class TrackerMap extends React.Component {
   componentDidMount() {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.location}&key=${process.env.REACT_APP_GoogleApiKey}`;
     axios
-      .get(url)
+      .get(url, { withCredentials: true })
       .then((res) => {
         this.setState({
           mapPosition: {

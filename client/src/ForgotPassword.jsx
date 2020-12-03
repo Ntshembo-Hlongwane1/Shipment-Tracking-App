@@ -56,7 +56,7 @@ export default function ForgotPassword() {
     data.append("email", email);
 
     try {
-      const response = await axios.post(url, data);
+      const response = await axios.post(url, data, { withCredentials: true });
       console.log(response);
       alert(response.data.msg);
     } catch (error) {

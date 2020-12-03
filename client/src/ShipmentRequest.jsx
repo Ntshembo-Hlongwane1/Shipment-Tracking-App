@@ -47,7 +47,7 @@ const ShipmentRequest = ({ authenticated, isCustomer }) => {
       const url = "/api/request-shipment";
 
       axios
-        .post(url, data)
+        .post(url, data, { withCredentials: true })
         .then((response) => {
           alert(response.data.msg);
         })

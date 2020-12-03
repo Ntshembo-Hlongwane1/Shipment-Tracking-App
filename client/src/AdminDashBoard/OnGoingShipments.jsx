@@ -9,7 +9,7 @@ const OnGoingShipments = () => {
     const url = "/api/all-pending-shipments";
 
     axios
-      .get(url)
+      .get(url, { withCredentials: true })
       .then((response) => {
         setShipments(response.data);
       })
