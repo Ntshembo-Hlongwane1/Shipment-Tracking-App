@@ -12,10 +12,16 @@ dotenv.config();
 
 const app = express();
 
+const origin = {
+  dev: "http://localhost:3000",
+  production: `https://shipment-tracker-web-app.herokuapp.com`,
+};
+
 //=====================================================Middlewares======================================================
 app.use(
   cors({
-    origin: `https://shipment-tracker-web-app.herokuapp.com/`,
+    origin:
+      process.env.NODE_ENV === "production" ? origin.production : origin.dev,
     credentials: true,
   })
 );
