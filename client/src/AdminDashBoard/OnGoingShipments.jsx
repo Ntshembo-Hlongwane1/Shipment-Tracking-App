@@ -6,7 +6,7 @@ const OnGoingShipments = () => {
   const [shipments, setShipments] = useState(null);
 
   useEffect(() => {
-    const url = "/api/all-pending-shipments";
+    const url = "http://localhost:5000/api/all-pending-shipments";
 
     axios
       .get(url, { withCredentials: true })
@@ -35,7 +35,7 @@ const OnGoingShipments = () => {
       minutes = minutes < 10 ? `0${minutes}` : minutes;
       pickup_time = `${hours}:${minutes} ${ampm}`;
 
-      const url = `/api/update-status/${ID}/${pickup_time}/${driver_picking_up_order}`;
+      const url = `http://localhost:5000/api/update-status/${ID}/${pickup_time}/${driver_picking_up_order}`;
       const data = new FormData();
       data.append("status", status);
       data.append("pickup_time", pickup_time);
@@ -57,7 +57,7 @@ const OnGoingShipments = () => {
       minutes = minutes < 10 ? `0${minutes}` : minutes;
       arrival_time = `${hours}:${minutes} ${ampm}`;
 
-      const url = `/api/update-status/${ID}/${arrival_time}/${null}`;
+      const url = `http://localhost:5000/api/update-status/${ID}/${arrival_time}/${null}`;
       const data = new FormData();
       data.append("status", status);
       data.append("arrival_time", arrival_time);
@@ -70,7 +70,7 @@ const OnGoingShipments = () => {
           console.log(error);
         });
     } else {
-      const url = `/api/update-status/${ID}/${null}/${null}`;
+      const url = `http://localhost:5000/api/update-status/${ID}/${null}/${null}`;
       const data = new FormData();
       data.append("status", status);
 

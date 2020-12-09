@@ -20,8 +20,7 @@ const origin = {
 //=====================================================Middlewares======================================================
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production" ? origin.production : origin.dev,
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );

@@ -61,7 +61,7 @@ export default function SignUp() {
     data.append("email", email);
     data.append("password", password);
 
-    const url = "/api/user-signup";
+    const url = "http://localhost:5000/api/user-signup";
     try {
       const response = await axios.post(url, data, { withCredentials: true });
       if (response.status === 200) {

@@ -39,7 +39,7 @@ const DesktopHeader = ({ isAuthenticated, isAdmin, isCustomer }) => {
         </Link>
         {isAdmin === true ? (
           <Link className="Router__link" to="/admin-dashboard">
-            <h4>Admin DashBoard</h4>
+            <h4 className="right__navLink">Admin DashBoard</h4>
           </Link>
         ) : isCustomer === true ? (
           <Link className="Router__link" to="/track-shipment">

@@ -51,7 +51,7 @@ export default function ForgotPassword() {
   const RequestPasswordReset = async (e) => {
     e.preventDefault();
 
-    const url = "/api/request-password-reset";
+    const url = "http://localhost:5000/api/request-password-reset";
     const data = new FormData();
     data.append("email", email);
 

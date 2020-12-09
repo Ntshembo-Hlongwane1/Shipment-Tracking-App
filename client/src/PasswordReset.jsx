@@ -57,7 +57,7 @@ export default function PasswordReset() {
     data.append("user_email", user_email);
     data.append("user_id", user_id);
     data.append("password", password);
-    const url = "/api/password-reset";
+    const url = "http://localhost:5000/api/password-reset";
     try {
       const response = await axios.post(url, data, { withCredentials: true });
       alert(response.data.msg);

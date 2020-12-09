@@ -44,7 +44,7 @@ const ShipmentRequest = ({ authenticated, isCustomer }) => {
       data.append("province", province);
       data.append("area", area);
       data.append("weight", weight);
-      const url = "/api/request-shipment";
+      const url = "http://localhost:5000/api/request-shipment";
 
       axios
         .post(url, data, { withCredentials: true })

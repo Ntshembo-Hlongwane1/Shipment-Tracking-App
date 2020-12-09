@@ -11,7 +11,7 @@ const ShipmentTracker = () => {
     const data = new FormData();
     data.append("shipment_id", shipmentOrder);
 
-    const url = "/api/track-shipment";
+    const url = "http://localhost:5000/api/track-shipment";
     axios
       .post(url, data, { withCredentials: true })
       .then((response) => {

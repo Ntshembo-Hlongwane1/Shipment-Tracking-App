@@ -22,7 +22,7 @@ const App = () => {
   const [mounted, setMounted] = useState(true);
 
   useEffect(() => {
-    const url = "/api/isLoggedIn";
+    const url = "http://localhost:5000/api/isLoggedIn";
 
     async function loadData() {
       try {

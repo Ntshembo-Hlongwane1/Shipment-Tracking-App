@@ -11,3 +11,9 @@
 .SideBarLayOut > h4 {
   margin-left: 0.5em;
 }
+
+@media screen and (min-width: 320px) and (max-width: 676px) {
+  .SideBarLayOut > h4 {
+    font-size: 0.8rem;
+  }
+}
